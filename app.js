@@ -7,10 +7,12 @@ const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
 //importing file
-const ErrorHandler = require("./src/utils/ErrorHandler");
+
 const adminRoutes = require("./src/routes/authRoutes");
 const createAdminRoutes = require("./src/routes/secretRoutes/createAdmin");
 const corsOptions = require("./src/config/corsOptions");
+
+const ErrorHandler = require("./src/middlewares/error");
 //declearing App
 const app = express();
 //setting up some important tools
