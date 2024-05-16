@@ -45,5 +45,15 @@
     "prettier": "^3.2.5",
     "rimraf": "^5.0.7",
     "standard-version": "^9.5.0"
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "npm run fix",
+      "npm run lint"
+    ],
+    "*.{js,json,css,html}": [
+      "prettier --write ."
+    ],
+    "*.test.{ts,js}": "jest"
   }
 }

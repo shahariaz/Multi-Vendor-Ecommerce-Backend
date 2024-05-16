@@ -21,5 +21,5 @@ jobs:
 
       - name: Run ES-Lint 👋
         run: |
-          npm fix &&
-          npm lint
+          npm run fix &&
+          npm run lint
