@@ -1,3 +1,1 @@
-module.exports.responseReturn = (res, code, data) => {
-  return res.status(code).json(data);
-};
+module.exports.responseReturn = (res, code, data) => res.status(code).json(data);

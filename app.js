@@ -6,23 +6,23 @@ const cors = require("cors");
 const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
-//importing file
+// importing file
 
 const adminRoutes = require("./src/routes/authRoutes");
 const createAdminRoutes = require("./src/routes/secretRoutes/createAdmin");
 const corsOptions = require("./src/config/corsOptions");
 
 const ErrorHandler = require("./src/middlewares/error");
-//declearing App
+// declearing App
 const app = express();
-//setting up some important tools
+// setting up some important tools
 app.use(helmet());
 app.use(compression());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 if (process.env.NODE_ENV !== "production") {
-  //setting up some dev-tools
+  // setting up some dev-tools
   app.use(morgan("combined"));
   require("dotenv").config({
     path: "config/.env",
@@ -34,14 +34,14 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-//user routes
+// user routes
 app.use("/api", adminRoutes);
 app.use("/secret", createAdminRoutes);
 app.use("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
-//Error handlers
+// Error handlers
 app.use(ErrorHandler);
-//exporting App
+// exporting App
 module.exports = app;

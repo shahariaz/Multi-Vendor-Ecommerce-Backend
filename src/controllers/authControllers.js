@@ -1,5 +1,5 @@
-const Admin = require("../models/adminModel");
 const bcrypt = require("bcrypt");
+const Admin = require("../models/adminModel");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsync = require("../utils/catchAsync");
 const { createToken } = require("../utils/tokenCreate");
@@ -22,7 +22,7 @@ class authController {
       if (!validPassword) {
         throw new ErrorHandler("Invalid email or password.", 400);
       } else {
-        let data = {
+        const data = {
           name: admin.name,
           email: admin.email,
           image: admin.image,
@@ -41,7 +41,7 @@ class authController {
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
-    const { email, password } = req.body;
+   
   });
 }
 

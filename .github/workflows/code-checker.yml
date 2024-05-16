@@ -1,0 +1,25 @@
+name: Code Checker
+on:
+  - pull_request
+  - push
+
+jobs:
+  backend:
+    name: Backend Codes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: v20.10.0
+
+      - name: Install Backend Dependence ✅
+        run: npm i
+
+      - name: Run ES-Lint 👋
+        run: |
+          npm fix &&
+          npm lint
