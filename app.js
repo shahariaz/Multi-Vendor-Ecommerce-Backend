@@ -6,14 +6,17 @@ const cors = require("cors");
 const helmet = require("helmet");
 const compression = require("compression");
 const rateLimit = require("express-rate-limit");
+//importing file
 const ErrorHandler = require("./src/utils/ErrorHandler");
-
+const adminRoutes = require("./src/routes/authRoutes");
+const createAdminRoutes = require("./src/routes/secretRoutes/createAdmin");
+const corsOptions = require("./src/config/corsOptions");
 //declearing App
 const app = express();
 //setting up some important tools
 app.use(helmet());
 app.use(compression());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 if (process.env.NODE_ENV !== "production") {
@@ -30,6 +33,11 @@ const limiter = rateLimit({
 app.use(limiter);
 
 //user routes
+app.use("/api", adminRoutes);
+app.use("/secret", createAdminRoutes);
+app.use("/", (req, res) => {
+  res.send("Welcome to the API");
+});
 
 //Error handlers
 app.use(ErrorHandler);
